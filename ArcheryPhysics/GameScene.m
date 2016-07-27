@@ -276,11 +276,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     SKLabelNode *score = (SKLabelNode*)[self childNodeWithName:@"score"];
     score.text = [NSString stringWithFormat:@"Score: %i", self.score];
     [projectile removeFromParent];
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> e918cd93390f76bec15a55c07cd2ecd5f7c1b964
     SKAction *hover = [SKAction sequence:@[
 //                                           [SKAction waitForDuration:0.25],
                                            [SKAction moveByX:15 y:00 duration:0.05],
