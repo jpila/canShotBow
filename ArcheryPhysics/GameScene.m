@@ -84,10 +84,12 @@ static inline CGPoint rwNormalize(CGPoint a) {
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     self.shotsFired ++;
-    SKNode *shotsFired = [self childNodeWithName:@"shotsFire"];
-    [shotsFired removeFromParent];
-    [self shotsFiredLabel];
-                          
+    SKLabelNode *shotsFired = (SKLabelNode*)[self childNodeWithName:@"shotsFire"];
+    shotsFired.text = [NSString stringWithFormat:@"Shots Fired: %i", self.shotsFired];
+//    [shotsFired removeFromParent];
+    
+//    [self shotsFiredLabel];
+    
     NSTimeInterval ti = [[NSDate date] timeIntervalSinceDate:self.StartDate];
     NSLog(@"Time: %f", ti);
     // 1 - Choose one of the touches to work with
@@ -244,9 +246,11 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 - (void)projectile:(SKSpriteNode *)projectile didCollideWithHead:(SKSpriteNode *)head {
     NSLog(@"Hit Head");
+    self.score +=2;
+    SKLabelNode *score = (SKLabelNode*)[self childNodeWithName:@"score"];
+    score.text = [NSString stringWithFormat:@"Score: %i", self.score];
     [projectile removeFromParent];
-    
-    
+
     SKAction *hover = [SKAction sequence:@[
 //                                           [SKAction waitForDuration:0.25],
                                            [SKAction moveByX:15 y:00 duration:0.05],
